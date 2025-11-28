@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahoot-Like Platform</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="Kahoot.css">
+</head>
+
+<body>
+
+    <section class="wtc-hero">
+        <div class="wtc-hero-blur"></div>
+        <div class="wtc-hero-content">
+            <h1 class="wtc-hero-title">Interactive Quiz Platform – Host & Player System</h1>
+        </div>
+    </section>
+
+    <section class="wtc-section">
+        <h2>Project Overview</h2>
+        <p>
+            This project is a real-time multiplayer quiz platform inspired by Kahoot. It was developed as a complete
+            full-stack school assignment, where the goal was to build a fully functioning interactive quiz system that
+            supports real-time communication. The platform consists of two separate Angular applications — a Host
+            interface and a Player interface — that both communicate with a shared .NET backend using SignalR.
+            All quiz data, sessions and player results are stored inside a Dockerized SQL Server environment, managed
+            through Entity Framework Core.
+            To support a stable workflow, the project also includes an automated CI/CD pipeline that builds and validates
+            every update, preventing broken code from being merged and keeping development smooth and reliable.
+        </p>
+    </section>
+
+    <section class="wtc-section">
+        <h2>Core Application Systems</h2>
+
+        <div class="wtc-row">
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Host Application</h3>
+                <p>
+                    The Host application controls the entire quiz session. It was built with Angular and follows a
+                    component-based structure, where every part of the workflow is separated. This includes selecting
+                    questions, starting rounds, showing correct answers, and monitoring the live results coming in from
+                    players.
+                    By keeping the structure modular, the host UI stays organized and easy to expand. The host receives
+                    real-time updates from the backend, ensuring that every incoming answer appears instantly. This creates
+                    a fast and responsive quiz experience that feels smooth for both the host and the players.
+                </p>
+            </div>
+
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Player Application</h3>
+                <p>
+                    The Player application is a clean and lightweight Angular project designed for speed.
+                    When the host launches a new question, the player receives the update instantly through SignalR.
+                    This makes answering feel immediate, no matter how many players are connected.
+                    The UI is intentionally simple: it only shows the current question, available answers and minimal
+                    feedback. This keeps the experience fast, readable and accessible across different devices and screen
+                    sizes. All answers are sent directly to the backend without delay, ensuring that the results are
+                    synchronized in real time.
+                </p>
+            </div>
+        </div>
+
+        <div class="wtc-row">
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Real-Time Communication</h3>
+                <p>
+                    Real-time communication is fully powered by SignalR. The backend broadcasts updates — such as new
+                    questions, lobby status, timer values and answer results — to all connected clients at the same time.
+                    Players send their answers to the hub, which forwards the information directly to the host.
+                    This communication loop was tested extensively to ensure it stays responsive and stable. Without this
+                    real-time layer, the quiz would lose the fast and interactive feel that defines it.
+                </p>
+            </div>
+
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Login & Session Flow</h3>
+                <p>
+                    Before implementing the login and session flow, I created a sequence diagram mapping every interaction
+                    between the frontends, the backend and the database. This visualized how a session is created, how
+                    players join using a code, and how the backend validates each step.
+                    Having a clear communication diagram prevented confusion later in development and made the system
+                    easier to maintain. Every part of the login flow became predictable, which reduced bugs and kept both
+                    applications perfectly in sync with the backend.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="wtc-section">
+        <h2>Technical Implementation</h2>
+
+        <div class="wtc-tech-grid">
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">ASP.NET Core API</h3>
+                <p>
+                    The backend was built using ASP.NET Core and handles all major quiz systems. It processes quiz
+                    questions, validates answers, manages player sessions and coordinates all real-time updates.
+                    I structured the API using a layered architecture (controllers, services, repositories), keeping the
+                    code easy to maintain, test and expand. This modular design allowed new features to be added without
+                    breaking existing functionality.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">Entity Framework Core</h3>
+                <p>
+                    All persistent quiz data — players, questions, answers and session details — is stored using
+                    Entity Framework Core. The database runs inside a Docker SQL Server container, ensuring that every
+                    team member works with the exact same environment.
+                    EF Core migrations were used throughout the project to update and maintain the database structure
+                    without losing data or causing version conflicts.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">SignalR Hub</h3>
+                <p>
+                    The SignalR hub synchronizes both Angular applications with the backend in real time. It broadcasts
+                    events from the host to all players and collects incoming answers instantly. This hub is the central
+                    communication layer of the entire platform.
+                    Without it, the quiz would not function as a real-time system. The hub ensures that everything stays
+                    synchronized regardless of connection speed or number of players.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">CI/CD Pipeline</h3>
+                <p>
+                    A GitHub Actions CI/CD pipeline automatically builds and validates both Angular applications and the
+                    .NET backend after each commit. This automated workflow prevents broken code from reaching the main
+                    branch and guarantees that every update follows a consistent quality standard.
+                    It simulates a professional environment where automated tests and checks are essential for reliable
+                    software development.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">SonarQube Analysis</h3>
+                <p>
+                    SonarQube was used to analyze the backend for issues such as duplicated code, complexity problems and
+                    maintainability warnings. The tool identified weak spots early in development, allowing them to be
+                    fixed before they caused larger issues.
+                    This significantly improved the quality of the codebase and made the entire system easier to extend.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">Docker SQL Server</h3>
+                <p>
+                    The SQL Server database runs entirely inside a Docker container, which eliminates local configuration
+                    differences and ensures a reproducible environment across all machines.
+                    This made development much more predictable and allowed the database to be reset, rebuilt or shared
+                    quickly without manual setup. It also ensured that the backend, EF Core migrations and both Angular
+                    applications always targeted the same consistent environment.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

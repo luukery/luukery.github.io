@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch The Cat</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="WatchTheCat.css">
+</head>
+<body>
+
+    <section class="wtc-hero">
+        <div class="wtc-hero-blur"></div>
+        <div class="wtc-hero-content">
+            <img src="../img/watch the cat/WatchTheCatCover.jpg" class="wtc-hero-image">
+            <h1 class="wtc-hero-title">Watch The Cat – Stealth Adventure Game</h1>
+        </div>
+    </section>
+
+    <section class="wtc-section">
+        <h2>Trailer</h2>
+        <video controls class="wtc-video">
+            <source src="../img/watch the cat/Watch the cat first trailer.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <section class="wtc-section">
+        <h2>Core Gameplay Systems</h2>
+
+        <div class="wtc-row">
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Interaction System</h3>
+                <img src="../img/watch the cat/Raytracing + icons showing.gif" class="wtc-img">
+                <p>
+                    This interaction system uses a forward raycast as the core of all player interactions.
+                    The raycast constantly checks what the player is looking at and determines whether the object in front of them is interactable.
+                    If the raycast hits an object that supports interaction, the system verifies whether the player is allowed to interact with it at that moment.
+                    When the object confirms that interaction is possible, it returns an icon to the UI, showing the player exactly what type of action can be performed.
+                </p>
+            </div>
+
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Hiding System</h3>
+                <img src="../img/watch the cat/Jump in box.gif" class="wtc-img">
+                <p>
+                    The hiding box is built on top of the interaction system.
+                    When the player looks at a box, the icon appears to show that hiding is possible.
+                    After interacting, the player automatically jumps into the box in a smooth animation.
+                    Inside the box, the mouse becomes invisible to the cat and can safely wait or observe the environment.
+                    The player stays hidden until they choose to jump out again, giving them a moment to breathe, plan their next move, or escape danger.
+                    This system makes hiding feel natural and responsive and reinforces the core tension of the game.
+                </p>
+            </div>
+        </div>
+
+        <div class="wtc-row">
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Dialogue System</h3>
+
+                <p>
+                    I first built the dialogue system by writing every line directly inside Unity.
+                    It worked for quick tests, but it became messy fast.
+                    Changing a line, adding a new scene or fixing a typo meant going into scripts,
+                    searching through objects and hoping nothing broke.
+                </p>
+
+                <img src="../img/watch the cat/Dialogue System.gif" class="wtc-dialogue-gif">
+
+                <p>
+                    To make the system easier to work with, I moved everything to Excel.
+                    Each row now represents a single dialogue line and contains the speaker,
+                    the text, a sound event and a few small settings that control how the line behaves.
+                </p>
+
+                <p>
+                    Updating or adding dialogue is now as simple as editing a spreadsheet.
+                </p>
+
+                <img src="../img/watch the cat/NPC Dialogue screenshot.png" class="wtc-img-inline">
+
+                <p>
+                    Every NPC has a DialogueIndexID.
+                    This ID decides which group of lines they should use at that moment in the story.
+                </p>
+
+                <p>
+                    When I talk to an NPC, the DialogueManager only receives this ID,
+                    looks up the matching lines in the Excel file and sends the result to the UI.
+                    The UI doesn’t know what it gets — it just shows whatever the manager returns.
+                </p>
+
+                <img src="../img/watch the cat/DialogueManager.png" class="wtc-img-inline">
+
+                <p>
+                    If an NPC runs out of lines for the active ID, the system automatically switches to their default dialogue.
+                    Moving the story forward is just as simple: increasing the NPC's index jumps them to the next part of their conversation.
+                </p>
+
+                <p>
+                    This keeps everything clean and separated.
+                    NPCs only store an index, the manager only fetches data and the UI only displays it.
+                </p>
+
+                <p>
+                    This setup makes the dialogue system easy to maintain and scale.
+                    I can add new conversations, story steps, sound triggers or conditions without touching Unity itself.
+                    NPCs react correctly as long as they’re given the right index.
+                    Triggering events after a conversation is also simple: I only need to fill in a string inside the Excel file.
+                </p>
+            </div>
+
+            <div class="wtc-half">
+                <h3 class="wtc-sub">Push Object System</h3>
+
+                <img src="../img/watch the cat/Push object.gif" class="wtc-img-medium">
+
+                <p>
+                    The Push Object System is designed to make pushing objects feel physical and believable for a small mouse.
+                    When the player jumps against a box, the system handles the movement, sound and recoil in one smooth animation.
+                </p>
+
+                <p>
+                    The system first checks from which side the player approaches the object.
+                    Each box only accepts pushes from specific angles, preventing unrealistic behaviour
+                    and making level design more controlled.
+                </p>
+
+                <p>
+                    When interacting, the player performs a small jump toward the box, hits it,
+                    and then hops backward as recoil. Meanwhile the box slides back using an animation curve,
+                    giving the push weight and personality.
+                </p>
+
+                <p>
+                    Every pushable object has its own editable settings in the Unity inspector:
+                    push distance, movement speed, allowed direction, recoil strength and the maximum number of pushes.
+                    This makes each instance easy to tune without extra coding.
+                </p>
+
+                <img src="../img/watch the cat/Pushbox.png" class="wtc-img-small">
+
+                <p>
+                    When a box reaches its movement limit, it can trigger an event in the world.
+                    This is done simply by writing an event name in the inspector, allowing the system to open doors,
+                    activate triggers or update quests.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="wtc-section">
+        <h2>Technical Implementation</h2>
+
+        <div class="wtc-tech-grid">
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">InteractiveBase Framework</h3>
+                <img src="../img/watch the cat/InteractiveBaseUpdated.png" class="wtc-img">
+                <p>
+                    A modular, component-based framework that unifies all player–object interactions.
+                    Every interactable object inherits the same base logic for detection, validation and execution,
+                    while implementing its own custom behavior. This keeps interactions consistent, prevents duplicated
+                    code, and allows new interaction types to be added with minimal impact on the rest of the system.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">Event System</h3>
+                <img src="../img/watch the cat/eventregistry.png" class="wtc-img">
+                <p>
+                    A centralized event-driven architecture that manages world logic and narrative flow.
+                    Systems register for specific events and react only when needed, resulting in a loosely-coupled
+                    structure. It coordinates quests, triggers NPC behavior, updates story progression and allows
+                    different systems to communicate without direct dependencies.
+                </p>
+            </div>
+
+            <div class="wtc-tech-card">
+                <h3 class="wtc-sub">FMOD 3D Audio</h3>
+                <img src="../img/watch the cat/Play3dFmod.png" class="wtc-img">
+                <p>
+                    Integrated FMOD middleware handles all spatial and dynamic audio in the game.
+                    Sound events are triggered in real-time based on movement, distance, surface types and world states.
+                    This includes footsteps, object interactions, ambient layers and tension cues, creating an adaptive
+                    audio environment that directly supports the stealth mechanics.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+</html>
