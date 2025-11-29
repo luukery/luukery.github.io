@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../img/watch the cat/WatchTheCatCover.jpg");
+    background-image: url("/img/watchthecat/WatchTheCatCover.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(28px) brightness(0.5);
