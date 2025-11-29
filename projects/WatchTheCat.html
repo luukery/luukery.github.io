@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch The Cat</title>
 
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="WatchTheCat.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/projects/WatchTheCat.css">
 </head>
 <body>
 
     <section class="wtc-hero">
         <div class="wtc-hero-blur"></div>
         <div class="wtc-hero-content">
-            <img src="../img/watch the cat/WatchTheCatCover.jpg" class="wtc-hero-image">
+            <img src="/img/watchthecat/WatchTheCatCover.jpg" class="wtc-hero-image">
             <h1 class="wtc-hero-title">Watch The Cat – Stealth Adventure Game</h1>
         </div>
     </section>
@@ -21,7 +21,7 @@
     <section class="wtc-section">
         <h2>Trailer</h2>
         <video controls class="wtc-video">
-            <source src="../img/watch the cat/Watch the cat first trailer.mp4" type="video/mp4">
+            <source src="/img/watchthecat/Watchthecatfirsttrailerr.mp4" type="video/mp4">
         </video>
     </section>
 
@@ -31,7 +31,7 @@
         <div class="wtc-row">
             <div class="wtc-half">
                 <h3 class="wtc-sub">Interaction System</h3>
-                <img src="../img/watch the cat/Raytracing + icons showing.gif" class="wtc-img">
+                <img src="/img/watchthecat/Raytracingiconsshowing.gif" class="wtc-img">
                 <p>
                     This interaction system uses a forward raycast as the core of all player interactions.
                     The raycast constantly checks what the player is looking at and determines whether the object in front of them is interactable.
@@ -42,7 +42,7 @@
 
             <div class="wtc-half">
                 <h3 class="wtc-sub">Hiding System</h3>
-                <img src="../img/watch the cat/Jump in box.gif" class="wtc-img">
+                <img src="/img/watchthecat/Jumpinbox.gif" class="wtc-img">
                 <p>
                     The hiding box is built on top of the interaction system.
                     When the player looks at a box, the icon appears to show that hiding is possible.
@@ -65,7 +65,7 @@
                     searching through objects and hoping nothing broke.
                 </p>
 
-                <img src="../img/watch the cat/Dialogue System.gif" class="wtc-dialogue-gif">
+                <img src="/img/watchthecat/DialogueSystem.gif" class="wtc-dialogue-gif">
 
                 <p>
                     To make the system easier to work with, I moved everything to Excel.
@@ -77,7 +77,7 @@
                     Updating or adding dialogue is now as simple as editing a spreadsheet.
                 </p>
 
-                <img src="../img/watch the cat/NPC Dialogue screenshot.png" class="wtc-img-inline">
+                <img src="/img/watchthecat/NPCDialoguescreenshot.png" class="wtc-img-inline">
 
                 <p>
                     Every NPC has a DialogueIndexID.
@@ -90,7 +90,7 @@
                     The UI doesn’t know what it gets — it just shows whatever the manager returns.
                 </p>
 
-                <img src="../img/watch the cat/DialogueManager.png" class="wtc-img-inline">
+                <img src="/img/watchthecat/DialogueManager.png" class="wtc-img-inline">
 
                 <p>
                     If an NPC runs out of lines for the active ID, the system automatically switches to their default dialogue.
@@ -113,7 +113,7 @@
             <div class="wtc-half">
                 <h3 class="wtc-sub">Push Object System</h3>
 
-                <img src="../img/watch the cat/Push object.gif" class="wtc-img-medium">
+                <img src="/img/watchthecat/Pushobject.gif" class="wtc-img-medium">
 
                 <p>
                     The Push Object System is designed to make pushing objects feel physical and believable for a small mouse.
@@ -138,7 +138,7 @@
                     This makes each instance easy to tune without extra coding.
                 </p>
 
-                <img src="../img/watch the cat/Pushbox.png" class="wtc-img-small">
+                <img src="/img/watchthecat/Pushbox.png" class="wtc-img-small">
 
                 <p>
                     When a box reaches its movement limit, it can trigger an event in the world.
@@ -157,7 +157,7 @@
 
             <div class="wtc-tech-card">
                 <h3 class="wtc-sub">InteractiveBase Framework</h3>
-                <img src="../img/watch the cat/InteractiveBaseUpdated.png" class="wtc-img">
+                <img src="/img/watchthecat/InteractiveBaseUpdated.png" class="wtc-img">
                 <p>
                     A modular, component-based framework that unifies all player–object interactions.
                     Every interactable object inherits the same base logic for detection, validation and execution,
@@ -168,7 +168,7 @@
 
             <div class="wtc-tech-card">
                 <h3 class="wtc-sub">Event System</h3>
-                <img src="../img/watch the cat/eventregistry.png" class="wtc-img">
+                <img src="/img/watchthecat/eventregistry.png" class="wtc-img">
                 <p>
                     A centralized event-driven architecture that manages world logic and narrative flow.
                     Systems register for specific events and react only when needed, resulting in a loosely-coupled
@@ -179,7 +179,7 @@
 
             <div class="wtc-tech-card">
                 <h3 class="wtc-sub">FMOD 3D Audio</h3>
-                <img src="../img/watch the cat/Play3dFmod.png" class="wtc-img">
+                <img src="/img/watchthecat/Play3dFmod.png" class="wtc-img">
                 <p>
                     Integrated FMOD middleware handles all spatial and dynamic audio in the game.
                     Sound events are triggered in real-time based on movement, distance, surface types and world states.
